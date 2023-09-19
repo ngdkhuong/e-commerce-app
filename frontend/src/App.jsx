@@ -1,15 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import {
-    HomePage,
-    ContactPage,
-    AboutPage,
-    LoginPage,
-    RegisterPage,
-    ForgotPasswordPage,
-    ResetPasswordPage,
-} from './routes/Routes';
+import { HomePage, ContactPage, AboutPage } from './routes/Routes';
+import { LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage } from './routes/RoutesAuth';
+
 // react-toastify
-// import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
@@ -24,6 +18,18 @@ const App = () => {
                 <Route path="/forgot-password" element={<ForgotPasswordPage />} />
                 <Route path="/reset-password" element={<ResetPasswordPage />} />
             </Routes>
+            <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </BrowserRouter>
     );
 };

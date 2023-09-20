@@ -7,3 +7,5 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
         path: 'config/.env',
     });
 }
+
+module.exports = app;

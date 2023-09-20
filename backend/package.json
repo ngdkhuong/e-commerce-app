@@ -4,9 +4,6 @@
   "description": "",
   "author": "Khuong Nguyen Dang",
   "main": "server.js",
-  "engines": {
-    "node": "18.x"
-  },
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js"

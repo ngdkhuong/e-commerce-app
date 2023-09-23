@@ -9,92 +9,86 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [visible, setVisible] = useState(false);
 
+    const toggle = () => {
+        setVisible(!visible);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
     };
 
     return (
-        <div className="min-h-screen bg-gray-200 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <h2 className="mt-6 text-center text-3xl font-semibold text-gray-800">ĐĂNG KÝ</h2>
+                <h2 className="mt-6 text-center text-[24px] font-semibold text-gray-800">Sign up and start learning</h2>
             </div>
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                    <form className="space-y-6" onSubmit={handleSubmit}>
+            <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                <div className="bg-white py-8 px-4 sm:rounded-lg sm:px-10">
+                    <form className="space-y-2" onSubmit={handleSubmit}>
                         <div>
-                            <label htmlFor="username" className="block text-sm font-medium text-slate-700">
-                                Tên người dùng
-                            </label>
-                            <div className="mt-1">
-                                <input
-                                    type="text"
-                                    name="username"
-                                    autoComplete="username"
-                                    required
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                />
-                            </div>
+                            <input
+                                type="username"
+                                name="username"
+                                required
+                                placeholder="Username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                className="text-black w-full border border-black p-3 focus:outline-none"
+                            />
                         </div>
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-slate-700">
-                                Email
-                            </label>
-                            <div className="mt-1">
-                                <input
-                                    type="email"
-                                    name="email"
-                                    autoComplete="email"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                />
-                            </div>
+                            <input
+                                type="email"
+                                name="email"
+                                required
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="text-black w-full border border-black p-3 focus:outline-none"
+                            />
                         </div>
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-slate-700">
-                                Mật khẩu
-                            </label>
-                            <div className="mt-1 relative">
+                        <div className="relative ">
+                            <input
+                                type={visible ? 'text' : 'password'}
+                                name="password"
+                                required
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="text-black w-full border border-black p-3 focus:outline-none"
+                            />
+                            {visible === false ? (
+                                <AiOutlineEye size={25} className="absolute right-3 top-3" onClick={toggle} />
+                            ) : (
+                                <AiOutlineEyeInvisible size={25} className="absolute right-3 top-3" onClick={toggle} />
+                            )}
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <div className="flex text-center">
                                 <input
-                                    type={visible ? 'text' : 'password'}
-                                    name="password"
-                                    autoComplete="current-password"
-                                    required
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="mt-2 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                    type="checkbox"
+                                    name="remember-me"
+                                    id="remember-me"
+                                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                                 />
-                                {visible ? (
-                                    <AiOutlineEye
-                                        className="absolute right-2 top-2 cursor-pointer"
-                                        size={25}
-                                        onClick={() => setVisible(false)}
-                                    />
-                                ) : (
-                                    <AiOutlineEyeInvisible
-                                        className="absolute right-2 top-2 cursor-pointer"
-                                        size={25}
-                                        onClick={() => setVisible(true)}
-                                    />
-                                )}
+                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                                    Lưu mật khẩu
+                                </label>
                             </div>
                         </div>
                         <div>
                             <button
                                 type="submit"
-                                className="group relative w-full h-10 flex justify-center py-2 px-4 border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                                className="w-full h-10 flex justify-center py-2 px-4 text-sm font-medium text-white bg-violet-600 hover:bg-violet-500"
                             >
-                                ĐĂNG KÝ
+                                Register
                             </button>
                         </div>
 
                         <div className="flex items-center ư-full">
-                            <h4>Tôi đã có tài khoản ?</h4>
-                            <Link to="/login" className="text-blue-600 pl-2">
-                                Đăng nhập
+                            <h4>Already have an account?</h4>
+                            <Link to="/login" className="text-violet-800 pl-2">
+                                Log in
                             </Link>
                         </div>
                     </form>

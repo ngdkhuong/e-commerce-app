@@ -1,10 +1,11 @@
 import Courses from '../components/Courses';
-import { Header, SlideShow } from '../routes/RoutesLayout';
+import { Header, Slider } from '../routes/RoutesLayout';
 
 const HomePage = () => {
     return (
         <>
             <Header />
+            <Slider />
             <Courses />
         </>
     );

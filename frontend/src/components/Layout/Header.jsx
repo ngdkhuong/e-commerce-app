@@ -9,10 +9,12 @@ const Header = () => {
 
     return (
         <header>
-            <div className="fixed space-x-4 bg-white z-50 w-full h-[74px] shadow-lg text-center flex justify-between items-center px-4">
+            <div className="sticky space-x-4 bg-white z-50 w-full h-[74px] shadow-lg text-center flex justify-between items-center px-4">
                 {/* desktop */}
                 <FiMenu className="h-6 w-6 md:hidden" />
-                <h2 className="text-3xl">IT-COURSE</h2>
+                <Link to="/" className="text-3xl">
+                    IT-EDU
+                </Link>
                 <h3 className="hidden text-sm md:block">Categories</h3>
                 <form
                     action=""
@@ -28,19 +30,23 @@ const Header = () => {
                         className="bg-transparent text-sm outline-none"
                     />
                 </form>
-                <h3 className="hidden text-sm lg:block">Udemy Business</h3>
-                <h3 className="hidden text-sm lg:block md:hidden">Teaching on Business</h3>
+                <Link className="hidden text-sm lg:block">Udemy Business</Link>
+                <Link className="hidden text-sm lg:block md:hidden">Teaching on Business</Link>
                 <div className="flex">
                     <AiOutlineSearch className="h-6 w-6 mx-4 text-gray-400 md:hidden" />
                     <AiOutlineShoppingCart className="h-6 w-6" />
                 </div>
                 <div className="hidden md:flex pr-4 space-x-4 justify-end">
-                    <button className="border border-black h-10 text-sm font-bold w-20 hover:bg-slate-50">
-                        Log In
-                    </button>
-                    <button className="border bg-black text-white h-10 text-sm font-bold w-20 hover:bg-slate-800">
-                        Register
-                    </button>
+                    <Link to="/login">
+                        <button className="border border-black h-10 text-sm font-bold w-20 hover:bg-slate-50">
+                            Log In
+                        </button>
+                    </Link>
+                    <Link to="/register">
+                        <button className="border bg-black text-white h-10 text-sm font-bold w-20 hover:bg-slate-800">
+                            Register
+                        </button>
+                    </Link>
                     <button className="border border-black h-10 flex justify-center items-center w-10 hover:bg-slate-50">
                         <AiOutlineGlobal className="h-5 w-5" />
                     </button>

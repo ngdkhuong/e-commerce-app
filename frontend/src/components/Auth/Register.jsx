@@ -33,7 +33,7 @@ const Register = () => {
                                 placeholder="Username"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
-                                className="text-black w-full border border-black p-3 focus:outline-none"
+                                className="text-black w-full border border-black p-3 focus:outline-none hover:bg-slate-100"
                             />
                         </div>
                         <div>
@@ -44,7 +44,7 @@ const Register = () => {
                                 placeholder="Email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="text-black w-full border border-black p-3 focus:outline-none"
+                                className="text-black w-full border border-black p-3 focus:outline-none hover:bg-slate-100"
                             />
                         </div>
                         <div className="relative ">
@@ -55,7 +55,7 @@ const Register = () => {
                                 placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="text-black w-full border border-black p-3 focus:outline-none"
+                                className="text-black w-full border border-black p-3 focus:outline-none hover:bg-slate-100"
                             />
                             {visible === false ? (
                                 <AiOutlineEye size={25} className="absolute right-3 top-3" onClick={toggle} />

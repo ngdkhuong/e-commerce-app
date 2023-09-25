@@ -1,5 +1,5 @@
 import Courses from '../components/Courses';
-import { Header, Slider } from '../routes/RoutesLayout';
+import { Footer, Header, Slider } from '../routes/RoutesLayout';
 
 const HomePage = () => {
     return (
@@ -7,6 +7,7 @@ const HomePage = () => {
             <Header />
             <Slider />
             <Courses />
+            <Footer />
         </>
     );
 };

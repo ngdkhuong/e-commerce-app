@@ -30,15 +30,19 @@ const Login = () => {
                     <form className="space-y-2" onSubmit={handleSubmit}>
                         <div className="relative">
                             <FcGoogle size={25} className="absolute left-3 top-3" />
-                            <button className="w-full border border-black p-3 focus:outline-none text-left pl-10">
-                                Continue with Google
-                            </button>
+                            <Link to="#">
+                                <button className="w-full border border-black p-3 focus:outline-none text-left pl-10 hover:bg-slate-100">
+                                    Continue with Google
+                                </button>
+                            </Link>
                         </div>
                         <div className="relative">
                             <AiFillFacebook size={25} fill={'blue'} className="absolute left-3 top-3" />
-                            <button className="w-full border border-black p-3 focus:outline-none text-left pl-10">
-                                Continue with Google
-                            </button>
+                            <Link to="#">
+                                <button className="w-full border border-black p-3 focus:outline-none text-left pl-10 ">
+                                    Continue with Google
+                                </button>
+                            </Link>
                         </div>
                         <div className="">
                             <input
@@ -48,7 +52,7 @@ const Login = () => {
                                 placeholder="Email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="text-black w-full border border-black p-3 focus:outline-none"
+                                className="text-black w-full border border-black p-3 focus:outline-none hover:bg-slate-100"
                             />
                         </div>
                         <div className="relative ">
@@ -59,7 +63,7 @@ const Login = () => {
                                 placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="text-black w-full border border-black p-3 focus:outline-none"
+                                className="text-black w-full border border-black p-3 focus:outline-none hover:bg-slate-100"
                             />
                             {visible === false ? (
                                 <AiOutlineEye size={25} className="absolute right-3 top-3" onClick={toggle} />

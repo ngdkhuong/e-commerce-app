@@ -1,11 +1,11 @@
 import Courses from '../components/Courses';
-import { Footer, Header, Slider } from '../routes/RoutesLayout';
+import { Footer, Header, Banner } from '../routes/RoutesLayout';
 
 const HomePage = () => {
     return (
         <>
             <Header />
-            <Slider />
+            <Banner />
             <Courses />
             <Footer />
         </>

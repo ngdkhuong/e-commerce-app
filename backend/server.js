@@ -1,34 +1,16 @@
-const app = require('./app');
-const connectDatabase = require('./db/Database');
+const express = require('express');
+const dbConnect = require('./config/dbConnect');
+const app = express();
+const dotenv = require('dotenv').config();
+const PORT = process.env.PORT || 4000;
 
-// Handling uncaught Exception
-process.on('uncaughtException', (error) => {
-    console.error(`Error: ${error.message}`);
-    // Perform any necessary cleanup or logging here
-    process.exit(1); // Exit the application with an error code
+dbConnect();
+
+// GET testing server
+app.get('/', (req, res) => {
+    res.send('Welcome to LMS Server! Suka Blyad');
 });
 
-// config
-if (process.env.NODE_ENV !== 'PRODUCTION') {
-    require('dotenv').config({
-        path: 'config/.env',
-    });
-}
-
-// Connect Database
-connectDatabase();
-
-// Create server
-const server = app.listen(process.env.PORT, () => {
-    console.log(`Server running at http://localhost:${process.env.PORT}`);
-});
-
-// unhandled promise rejection
-process.on('unhandledRejection', (err) => {
-    console.log(`Shutting down the server for ${err.message}`);
-    console.log('Shutting down the server for unhandled promise rejection');
-
-    server.close(() => {
-        process.exit(1);
-    });
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

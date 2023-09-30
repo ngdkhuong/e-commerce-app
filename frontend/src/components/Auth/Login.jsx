@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AiFillFacebook, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 import { toast } from 'react-toastify';
+import server from '../../server';
 
 const Login = () => {
     // const navigate = useNavigate();
@@ -14,8 +15,14 @@ const Login = () => {
         setVisible(!visible);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const res = await server.post('/api/user/login', { email, password });
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -65,10 +72,10 @@ const Login = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="text-black w-full border border-black p-3 focus:outline-none hover:bg-slate-100"
                             />
-                            {visible === false ? (
-                                <AiOutlineEye size={25} className="absolute right-3 top-3" onClick={toggle} />
-                            ) : (
+                            {visible ? (
                                 <AiOutlineEyeInvisible size={25} className="absolute right-3 top-3" onClick={toggle} />
+                            ) : (
+                                <AiOutlineEye size={25} className="absolute right-3 top-3" onClick={toggle} />
                             )}
                         </div>
                         <div>

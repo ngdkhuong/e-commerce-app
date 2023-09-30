@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import server from '../../server';
 
 const Register = () => {
     // const navigate = useNavigate();
@@ -13,8 +14,14 @@ const Register = () => {
         setVisible(!visible);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const res = await server.post('/api/user/register', { email, password });
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -25,7 +32,7 @@ const Register = () => {
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 sm:rounded-lg sm:px-10">
                     <form className="space-y-2" onSubmit={handleSubmit}>
-                        <div>
+                        {/* <div>
                             <input
                                 type="username"
                                 name="username"
@@ -35,7 +42,7 @@ const Register = () => {
                                 onChange={(e) => setUsername(e.target.value)}
                                 className="text-black w-full border border-black p-3 focus:outline-none hover:bg-slate-100"
                             />
-                        </div>
+                        </div> */}
                         <div>
                             <input
                                 type="email"

@@ -1,1 +1,8 @@
-export const server = 'http://localhost:3000';
+import axios from 'axios';
+
+const server = axios.create({
+    baseURL: 'http://localhost:3000',
+    withCredentials: true,
+});
+
+export default server;

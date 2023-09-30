@@ -43,5 +43,20 @@ const loginUser = asyncHandler(async (req, res) => {
 });
 
 // Get All User
+const getAllUser = asyncHandler(async (req, res) => {
+    try {
+        const allUser = await User.find();
+        res.status(200).json({
+            status: true,
+            message: 'All users fetched successfully',
+            allUser,
+        });
+    } catch (error) {
+        throw new Error(error);
+    }
+});
 
-module.exports = { registerUser, loginUser };
+// Update profile user
+const updateUser = asyncHandler(async (req, res) => {});
+
+module.exports = { registerUser, loginUser, getAllUser };

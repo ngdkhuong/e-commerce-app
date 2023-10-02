@@ -3,14 +3,10 @@ const bcrypt = require('bcrypt');
 
 let userSchema = new mongoose.Schema(
     {
-        // firstname: {
-        //     type: String,
-        //     required: true,
-        // },
-        // lastname: {
-        //     type: String,
-        //     required: true,
-        // },
+        username: {
+            type: String,
+            required: true,
+        },
         email: {
             type: String,
             required: true,
@@ -22,12 +18,6 @@ let userSchema = new mongoose.Schema(
             default:
                 'https://e7.pngegg.com/pngimages/178/595/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black-thumbnail.png',
         },
-        // mobile: {
-        //     type: String,
-        //     required: true,
-        //     unique: true,
-        //     index: true,
-        // },
         password: {
             type: String,
             required: true,

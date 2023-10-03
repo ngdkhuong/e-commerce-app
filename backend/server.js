@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 4000;
 dbConnect();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Middleware for handling CORS POLICY
 app.use(

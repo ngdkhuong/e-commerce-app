@@ -74,7 +74,7 @@ const getAUser = asyncHandler(async (req, res) => {
 });
 
 // Update profile user
-const updateProfile = asyncHandler(async (req, res) => {
+const updateUser = asyncHandler(async (req, res) => {
     const { _id } = req.user;
 
     try {
@@ -124,13 +124,47 @@ const unblockUser = asyncHandler(async (req, res) => {
     }
 });
 
+// Reset Password
+const updatePassword = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { password } = req.body;
+    validateMongoDb(_id);
+    try {
+        const user = await User.findById(_id);
+        if (user && password && (await user.isPasswordMatched(password))) {
+            throw new Error('Please provide a new password instead of old one');
+        } else {
+            user.password = password;
+            await user.save();
+            res.status(200).json({ status: true, message: 'Password Updated Successfully!' });
+        }
+    } catch (error) {
+        throw new Error(error);
+    }
+});
+
+// Forgot Password Token
+const forgotPassword = asyncHandler(async (req, res) => {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) throw new Error("User Not Exists with this email!")
+    try {
+        const token = await user.createPasswordResetToken()
+        await user.save(token);
+        const resetLink = 
+    } catch (error) {
+        throw new Error(error)
+    }
+});
+
 module.exports = {
     registerUser,
     loginUser,
     getAllUser,
     getAUser,
-    updateProfile,
+    updateUser,
     deleteUser,
     blockUser,
     unblockUser,
+    updatePassword,
 };

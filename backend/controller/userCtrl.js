@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const asyncHandler = require('express-async-handler');
 const validateMongoDb = require('../config/validateMongoDb');
 const crypto = require('crypto');
+const sendEmail = require('./emailCtrl');
 
 // Register a User
 const registerUser = asyncHandler(async (req, res) => {
@@ -152,7 +153,14 @@ const forgotPassword = asyncHandler(async (req, res) => {
     try {
         const token = await user.createPasswordResetToken();
         await user.save(token);
-        const resetLink = `http://localhost:3000/api/user/reset-password/${token}`;
+        const resetLink = `http://localhost:4000/api/user/reset-password/${token}`;
+        const data = {
+            to: email,
+            text: `Hey ${user?.username}`,
+            subject: 'Forgot Password',
+            html: resetLink,
+        };
+        sendEmail(data);
         res.status(200).json(resetLink);
     } catch (error) {
         throw new Error(error);

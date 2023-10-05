@@ -1,4 +1,4 @@
-const express = require('express');
+const userRouter = require('express').Router();
 const {
     registerUser,
     loginUser,
@@ -13,7 +13,6 @@ const {
     resetPassword,
 } = require('../controller/userCtrl');
 const { isAdmin, authMiddleware } = require('../middleware/authMiddleware');
-const userRouter = express.Router();
 
 // all post routes
 userRouter.post('/register', registerUser);

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
-import server from '../../server';
+import server from '../../static/server';
 
 const Register = () => {
     // const navigate = useNavigate();
@@ -64,10 +64,18 @@ const Register = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="text-black w-full border border-black p-3 focus:outline-none hover:bg-slate-100"
                             />
-                            {visible === false ? (
-                                <AiOutlineEye size={25} className="absolute right-3 top-3" onClick={toggle} />
+                            {visible ? (
+                                <AiOutlineEye
+                                    size={25}
+                                    className="hidden focus:absolute right-3 top-3"
+                                    onClick={toggle}
+                                />
                             ) : (
-                                <AiOutlineEyeInvisible size={25} className="absolute right-3 top-3" onClick={toggle} />
+                                <AiOutlineEyeInvisible
+                                    size={25}
+                                    className="hidden focus:absolute right-3 top-3"
+                                    onClick={toggle}
+                                />
                             )}
                         </div>
                         <div className="flex items-center justify-between">

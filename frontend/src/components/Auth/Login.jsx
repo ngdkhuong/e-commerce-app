@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiFillFacebook, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
-import { toast } from 'react-toastify';
-import server from '../../server';
+// import { toast } from 'react-toastify';
+import server from '../../static/server';
 
 const Login = () => {
     // const navigate = useNavigate();
@@ -73,9 +73,17 @@ const Login = () => {
                                 className="text-black w-full border border-black p-3 focus:outline-none hover:bg-slate-100"
                             />
                             {visible ? (
-                                <AiOutlineEyeInvisible size={25} className="absolute right-3 top-3" onClick={toggle} />
+                                <AiOutlineEyeInvisible
+                                    size={25}
+                                    className={'hidden focus:absolute right-3 top-3'}
+                                    onClick={toggle}
+                                />
                             ) : (
-                                <AiOutlineEye size={25} className="absolute right-3 top-3" onClick={toggle} />
+                                <AiOutlineEye
+                                    size={25}
+                                    className={'hidden focus:absolute right-3 top-3'}
+                                    onClick={toggle}
+                                />
                             )}
                         </div>
                         <div>

@@ -11,6 +11,7 @@ const googleRouter = require('./router/googleRoutes');
 const app = express();
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 5000;
+const passportSetup = require('./utils/passport');
 
 dbConnect();
 /* This code snippet is configuring and setting up a session middleware for the Express.js application. */
@@ -45,7 +46,7 @@ app.get('/api/test', (req, res) => {
     res.send('Welcome to LMS Server! Suka Blyad');
 });
 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send(`<a href="http://localhost:4000/google">Login With Google</a>`);
 });
 

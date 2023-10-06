@@ -22,20 +22,13 @@ googleRouter.get(
     }),
 );
 
-googleRouter.get(
-    '/google',
-    expressAsyncHandler(async (req, res) => {
-        await passport.authenticate('google', ['profile', 'email']);
-    }),
-);
+googleRouter.get('/google', passport.authenticate('google', ['profile', 'email']));
 
 googleRouter.get(
     '/auth/google/callback',
-    expressAsyncHandler(async (req, res) => {
-        await passport.authenticate('google', {
-            successRedirect: '/login/success',
-            failureRedirect: '/login/failed',
-        });
+    passport.authenticate('google', {
+        successRedirect: '/login/success',
+        failureRedirect: '/login/failed',
     }),
 );
 

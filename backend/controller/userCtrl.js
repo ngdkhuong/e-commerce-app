@@ -156,7 +156,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
         const resetLink = `http://localhost:4000/api/user/reset-password/${token}`;
         const data = {
             to: email,
-            text: `Hey ${user?.username}`,
+            text: `Hey ${user.username}`,
             subject: 'Forgot Password',
             html: resetLink,
         };

@@ -15,10 +15,22 @@ const Login = () => {
         setVisible(!visible);
     };
 
+    // ! auth gg not complete
+    const authGoogle = async (e) => {
+        e.preventDefault();
+        try {
+            const auth = await server.get('/auth/google/callback');
+            console.log(auth);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const res = await server.post('/api/user/login', { email, password });
+
             console.log(res);
         } catch (error) {
             console.log(error);
@@ -37,8 +49,12 @@ const Login = () => {
                     <form className="space-y-2" onSubmit={handleSubmit}>
                         <div className="relative">
                             <FcGoogle size={25} className="absolute left-3 top-3" />
-                            <Link to="#">
-                                <button className="w-full border border-black p-3 focus:outline-none text-left pl-10 hover:bg-slate-100">
+                            <Link to="/google">
+                                <button
+                                    type="submit"
+                                    className="w-full border border-black p-3 focus:outline-none text-left pl-10 hover:bg-slate-100"
+                                    onClick={authGoogle}
+                                >
                                     Continue with Google
                                 </button>
                             </Link>

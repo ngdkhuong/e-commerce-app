@@ -36,8 +36,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Middleware for handling CORS POLICY
 app.use(
     cors({
-        origin: 'https://it-courses-client.vercel.app',
-        // origin: 'http://localhost:3000',
+        // origin: 'https://it-courses-client.vercel.app',
+        origin: 'http://localhost:3000',
         credentials: true,
     }),
 );
@@ -47,9 +47,10 @@ app.get('/api/test', (req, res) => {
     res.send('Welcome to LMS Server! Suka Blyad');
 });
 
-app.get('/', (req, res) => {
-    res.send(`<a href="https://it-courses-api.vercel.app/google">Login With Google</a>`);
-});
+// Testing google auth
+// app.get('/', (req, res) => {
+//     res.send(`<a href="http://localhost:4000/google">Login With Google</a>`);
+// });
 
 app.use('/api/user', userRouter);
 app.use('/', googleRouter);

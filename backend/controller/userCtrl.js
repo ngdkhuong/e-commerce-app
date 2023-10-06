@@ -153,7 +153,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
     try {
         const token = await user.createPasswordResetToken();
         await user.save(token);
-        const resetLink = `http://localhost:4000/api/user/reset-password/${token}`;
+        const resetLink = `http://localhost:3000/reset-password/${token}`;
         const data = {
             to: email,
             text: `Hey ${user.username}`,

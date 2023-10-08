@@ -52,8 +52,12 @@ app.get('/api/test', (req, res) => {
 //     res.send(`<a href="http://localhost:4000/google">Login With Google</a>`);
 // });
 
+// Auth
 app.use('/api/user', userRouter);
 app.use('/', googleRouter);
+
+// Tutorial Category
+app.use('/api/tutorial', tutorialRouter);
 
 app.use(notFound);
 app.use(errorHandler);

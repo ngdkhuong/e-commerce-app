@@ -15,15 +15,10 @@ const Login = () => {
         setVisible(!visible);
     };
 
-    // ! auth gg not complete
-    const authGoogle = async (e) => {
+    // auth gg complete
+    const authGoogle = (e) => {
         e.preventDefault();
-        try {
-            const auth = await server.get('/auth/google/callback');
-            console.log(auth);
-        } catch (error) {
-            console.log(error);
-        }
+        window.open('http://localhost:4000/google', '_self');
     };
 
     const handleSubmit = async (e) => {
@@ -45,28 +40,27 @@ const Login = () => {
                 </h2>
             </div>
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="bg-white py-8 px-4 sm:rounded-lg sm:px-10">
+                <div className="bg-white py-8 px-4 sm:rounded-lg sm:px-10 space-y-2">
+                    <div className="relative">
+                        <FcGoogle size={25} className="absolute left-3 top-3" />
+
+                        <button
+                            type="submit"
+                            className="w-full border border-black p-3 focus:outline-none text-left pl-10 hover:bg-slate-100"
+                            onClick={authGoogle}
+                        >
+                            Continue with Google
+                        </button>
+                    </div>
+                    <div className="relative">
+                        <AiFillFacebook size={25} fill={'blue'} className="absolute left-3 top-3" />
+                        <Link to="#">
+                            <button className="w-full border border-black p-3 focus:outline-none text-left pl-10 ">
+                                Continue with Google
+                            </button>
+                        </Link>
+                    </div>
                     <form className="space-y-2" onSubmit={handleSubmit}>
-                        <div className="relative">
-                            <FcGoogle size={25} className="absolute left-3 top-3" />
-                            <Link to="/google">
-                                <button
-                                    type="submit"
-                                    className="w-full border border-black p-3 focus:outline-none text-left pl-10 hover:bg-slate-100"
-                                    onClick={authGoogle}
-                                >
-                                    Continue with Google
-                                </button>
-                            </Link>
-                        </div>
-                        <div className="relative">
-                            <AiFillFacebook size={25} fill={'blue'} className="absolute left-3 top-3" />
-                            <Link to="#">
-                                <button className="w-full border border-black p-3 focus:outline-none text-left pl-10 ">
-                                    Continue with Google
-                                </button>
-                            </Link>
-                        </div>
                         <div className="">
                             <input
                                 type="email"
@@ -102,33 +96,20 @@ const Login = () => {
                                 />
                             )}
                         </div>
-                        <div>
-                            {/* <div className="flex text-center">
-                                <input
-                                    type="checkbox"
-                                    name="remember-me"
-                                    id="remember-me"
-                                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                    Lưu mật khẩu
-                                </label>
-                            </div> */}
-                            <div className="flex items-center justify-center">
-                                or
-                                <Link className="pl-2 font-medium underline text-violet-600" to="/forgot-password">
-                                    Forgot password
-                                </Link>
-                            </div>
+
+                        <div className="flex items-center justify-center">
+                            or
+                            <Link className="pl-2 font-medium underline text-violet-600" to="/forgot-password">
+                                Forgot password
+                            </Link>
                         </div>
-                        <div>
-                            <button
-                                type="submit"
-                                className="w-full h-10 flex justify-center py-2 px-4 text-sm font-medium text-white bg-violet-600 hover:bg-violet-500"
-                            >
-                                Log in
-                            </button>
-                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full h-10 flex justify-center py-2 px-4 text-sm font-medium text-white bg-violet-600 hover:bg-violet-500"
+                        >
+                            Log in
+                        </button>
 
                         <div className="flex items-center ư-full">
                             <h4>Don{"'"}t have an account?</h4>

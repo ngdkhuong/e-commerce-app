@@ -10,9 +10,22 @@ passport.use(
             callbackURL: '/auth/google/callback',
             scope: ['profile', 'email'],
         },
-        function (accessToken, refreshToken, profile, cb) {
-            console.log(profile);
-            return cb(null, profile);
+        async function (accessToken, refreshToken, profile, cb) {
+            let data = profile?._json;
+            const user = await User.findOne({ email: data.email });
+            if (user) {
+                console.log(user);
+                return cb(null, user);
+            } else {
+                const newUser = await User.create({
+                    username: data.name,
+                    user_image: data.picture,
+                    email: data.email,
+                    roles: 'user',
+                });
+                console.log(newUser);
+                return cb(null, newUser);
+            }
         },
     ),
 );

@@ -11,6 +11,8 @@ const googleRouter = require('./router/googleRoutes');
 const passportSetup = require('./utils/passport');
 const tutCatRouter = require('./router/tutCatRoutes');
 const tutorialRouter = require('./router/tutorialRoutes');
+const newsletterRouter = require('./router/newsLetterRoutes');
+const reviewRouter = require('./router/reviewRoutes');
 const app = express();
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 5000;
@@ -57,12 +59,10 @@ app.get('/api/test', (req, res) => {
 // Auth
 app.use('/api/user', userRouter);
 app.use('/', googleRouter);
-
-// Tutorial Category
 app.use('/api/tutorial/category', tutCatRouter);
-
-// Tutorial
 app.use('/api/tutorial', tutorialRouter);
+app.use('/api/newsletter', newsletterRouter);
+app.use('/api/review', reviewRouter);
 
 app.use(notFound);
 app.use(errorHandler);

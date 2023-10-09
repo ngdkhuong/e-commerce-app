@@ -63,6 +63,7 @@ app.use('/api/tutorial/category', tutCatRouter);
 app.use('/api/tutorial', tutorialRouter);
 app.use('/api/newsletter', newsletterRouter);
 app.use('/api/review', reviewRouter);
+app.use('/api/contact', contactRouter);
 
 app.use(notFound);
 app.use(errorHandler);

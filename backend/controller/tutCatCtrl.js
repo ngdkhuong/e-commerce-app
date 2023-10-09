@@ -3,6 +3,7 @@ const TutorialCategory = require('../models/tutCategory');
 const asyncHandler = require('express-async-handler');
 const validateMongoDb = require('../config/validateMongoDb');
 
+// create tutorial category || POST
 const postTutorialCategory = asyncHandler(async (req, res) => {
     try {
         if (req.body.title) {
@@ -51,10 +52,11 @@ const deleteATutCat = asyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongoDb(id);
     try {
-        const deleteTutCat = await TutorialCategory.findByIdAndUpdate(id);
+        const deleteTutCat = await TutorialCategory.findByIdAndDelete(id);
         res.status(200).json({
             status: true,
             message: 'Deleted Tutorial Category Successfully!',
+            deleteTutCat,
         });
     } catch (error) {
         throw new Error(error);
@@ -65,6 +67,9 @@ const updateATutCat = asyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongoDb(id);
     try {
+        if (req.body.title) {
+            req.body.slug = slugify(req.body.title.toLowerCase());
+        }
         const updateTutCat = await TutorialCategory.findByIdAndUpdate(id, req.body, { new: true });
         res.status(200).json({
             status: true,

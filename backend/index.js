@@ -8,11 +8,12 @@ const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const userRouter = require('./router/userRoutes');
 const googleRouter = require('./router/googleRoutes');
+const passportSetup = require('./utils/passport');
+const tutCatRouter = require('./router/tutCatRoutes');
+const tutorialRouter = require('./router/tutorialRoutes');
 const app = express();
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 5000;
-const passportSetup = require('./utils/passport');
-const tutCatRouter = require('./router/tutCatRoutes');
 
 dbConnect();
 /* This code snippet is configuring and setting up a session middleware for the Express.js application. */
@@ -59,6 +60,9 @@ app.use('/', googleRouter);
 
 // Tutorial Category
 app.use('/api/tutorial/category', tutCatRouter);
+
+// Tutorial
+app.use('/api/tutorial', tutorialRouter);
 
 app.use(notFound);
 app.use(errorHandler);

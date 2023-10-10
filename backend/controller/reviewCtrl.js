@@ -90,6 +90,5 @@ module.exports = {
     getAllReviews,
     getAReview,
     deleteAReview,
-    updateReview,
     updateReviewStatus,
 };

@@ -23,8 +23,8 @@ const getAllContacts = asyncHandler(async (req, res) => {
 
         res.status(200).json({
             status: true,
-            message: 'Enquirys Fetched Successfully!',
-            Contact,
+            message: 'Enquiries Fetched Successfully!',
+            contact,
         });
     } catch (error) {
         throw new Error(error);
@@ -82,6 +82,5 @@ module.exports = {
     getAllContacts,
     getAContact,
     deleteAContact,
-    updateContact,
     updateContactStatus,
 };

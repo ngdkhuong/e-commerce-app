@@ -1,38 +1,33 @@
 const mongoose = require('mongoose');
 
-let contactSchema = new mongoose.Schema(
+let videoSchema = new mongoose.Schema(
     {
-        name: {
-            type: String,
-            required: true,
-            index: true,
-        },
-        email: {
+        title: {
             type: String,
             required: true,
         },
-        mobile: {
+        slug: {
             type: String,
             required: true,
         },
-        subject: {
+        thumbnail: {
+            type: String,
+            default: 'https://climate.onep.go.th/wp-content/uploads/2020/01/default-image.jpg',
+        },
+        description: {
             type: String,
             required: true,
         },
-        profession: {
+        video_url: {
             type: String,
             required: true,
         },
-        comment: {
-            type: String,
+        keywords: {
+            type: [],
             required: true,
-        },
-        status: {
-            type: String,
-            default: 'Submitted',
         },
     },
     { timestamps: true },
 );
 
-module.exports = mongoose.model('Contact', contactSchema);
+module.exports = mongoose.model('Video', videoSchema);

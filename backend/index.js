@@ -13,6 +13,8 @@ const tutCatRouter = require('./router/tutCatRoutes');
 const tutorialRouter = require('./router/tutorialRoutes');
 const newsletterRouter = require('./router/newsLetterRoutes');
 const reviewRouter = require('./router/reviewRoutes');
+const contactRouter = require('./router/contactRoutes');
+const videoRouter = require('./router/videoRoutes');
 const app = express();
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 5000;
@@ -64,6 +66,7 @@ app.use('/api/tutorial', tutorialRouter);
 app.use('/api/newsletter', newsletterRouter);
 app.use('/api/review', reviewRouter);
 app.use('/api/contact', contactRouter);
+app.use('/api/video', videoRouter);
 
 app.use(notFound);
 app.use(errorHandler);

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const blogCatSchema = new mongoose.Schema(
+let courseCatSchema = new mongoose.Schema(
     {
         title: {
             type: String,
@@ -10,8 +10,6 @@ const blogCatSchema = new mongoose.Schema(
         slug: {
             type: String,
             required: true,
-            unique: true,
-            index: true,
         },
     },
     {
@@ -19,4 +17,4 @@ const blogCatSchema = new mongoose.Schema(
     },
 );
 
-module.exports = mongoose.model('BlogCategory', blogCatSchema);
+module.exports = mongoose.model('CourseCategory', courseCatSchema);

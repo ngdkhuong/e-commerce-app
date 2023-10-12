@@ -34,7 +34,7 @@ const getAllBlogCategories = asyncHandler(async (req, res) => {
     }
 });
 
-const getABlogCat = asyncHandler(async (req, res) => {
+const getABlogCategory = asyncHandler(async (req, res) => {
     const { slug } = req.params;
     try {
         const findBlogCat = await BlogCategory.findOne({ slug: slug });
@@ -48,7 +48,7 @@ const getABlogCat = asyncHandler(async (req, res) => {
     }
 });
 
-const deleteABlogCat = asyncHandler(async (req, res) => {
+const deleteABlogCategory = asyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongoDb(id);
     try {
@@ -63,7 +63,7 @@ const deleteABlogCat = asyncHandler(async (req, res) => {
     }
 });
 
-const updateABlogCat = asyncHandler(async (req, res) => {
+const updateABlogCategory = asyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongoDb(id);
     try {
@@ -81,7 +81,7 @@ const updateABlogCat = asyncHandler(async (req, res) => {
 module.exports = {
     postBlogCategory,
     getAllBlogCategories,
-    getABlogCat,
-    deleteABlogCat,
-    updateABlogCat,
+    getABlogCategory,
+    deleteABlogCategory,
+    updateABlogCategory,
 };

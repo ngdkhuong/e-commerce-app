@@ -42,4 +42,14 @@ const isInstructor = asyncHandler(async (req, res, next) => {
     }
 });
 
-module.exports = { authMiddleware, isAdmin, isInstructor };
+const isBoth = asyncHandler(async (req, res, next) => {
+    const { email } = req.user;
+    const isBoth = await User.findOne({ email: email });
+    if (isBoth.roles !== 'instructor' && isBoth.roles !== 'admin') {
+        throw new Error('You should have either admin role or instructor role');
+    } else {
+        next();
+    }
+});
+
+module.exports = { authMiddleware, isAdmin, isInstructor, isBoth };

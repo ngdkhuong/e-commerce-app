@@ -67,6 +67,9 @@ const updateADocCat = asyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongoDb(id);
     try {
+        if (req.body.title) {
+            req.body.slug = slugify(req.body.title.toLowerCase());
+        }
         const updateDocCat = await DocumentCategory.findByIdAndUpdate(id, req.body, { new: true });
         res.status(200).json({
             status: true,

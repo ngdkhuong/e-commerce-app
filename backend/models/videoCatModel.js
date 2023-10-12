@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 
-const blogCatSchema = new mongoose.Schema(
+const videoCatSchema = new mongoose.Schema(
     {
         title: {
             type: String,
             required: true,
-            unique: true,
         },
         slug: {
             type: String,
@@ -19,4 +18,4 @@ const blogCatSchema = new mongoose.Schema(
     },
 );
 
-module.exports = mongoose.model('BlogCategory', blogCatSchema);
+module.exports = mongoose.model('VideoCategory', videoCatSchema);

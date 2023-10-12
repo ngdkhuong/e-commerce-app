@@ -10,6 +10,10 @@ let videoSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        category: {
+            type: String,
+            required: true,
+        },
         thumbnail: {
             type: String,
             default: 'https://climate.onep.go.th/wp-content/uploads/2020/01/default-image.jpg',

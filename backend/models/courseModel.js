@@ -48,16 +48,15 @@ let courseSchema = new mongoose.Schema(
             {
                 type: mongoose.SchemaTypes.ObjectId,
                 ref: 'Lesson',
-                required: true,
             },
         ],
         totalHours: {
             type: String,
-            required: true,
+            default: 0,
         },
         enrolls: {
             type: String,
-            required: true,
+            default: 0,
         },
         ratings: [
             {
@@ -71,7 +70,7 @@ let courseSchema = new mongoose.Schema(
         ],
         totalRatings: {
             type: Number,
-            required: true,
+            default: 0,
         },
     },
     {

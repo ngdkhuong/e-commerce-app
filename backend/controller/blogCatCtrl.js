@@ -10,11 +10,11 @@ const postBlogCategory = asyncHandler(async (req, res) => {
             req.body.slug = slugify(req.body.title.toLowerCase());
         }
 
-        const postBlogCat = await BlogCategory.create(req.body);
+        const blogCat = await BlogCategory.create(req.body);
         res.status(200).json({
             status: true,
             message: 'Blog Category Created Successfully!',
-            postBlogCat,
+            blogCat,
         });
     } catch (error) {
         throw new Error(error);
@@ -23,55 +23,55 @@ const postBlogCategory = asyncHandler(async (req, res) => {
 
 const getAllBlogCategories = asyncHandler(async (req, res) => {
     try {
-        const allBlogCat = await BlogCategory.find();
+        const blogCat = await BlogCategory.find();
         res.status(200).json({
             status: true,
             message: 'Blogs Category Fetched Successfully!',
-            allBlogCat,
+            blogCat,
         });
     } catch (error) {
         throw new Error(error);
     }
 });
 
-const getABlogCategory = asyncHandler(async (req, res) => {
+const getBlogCategory = asyncHandler(async (req, res) => {
     const { slug } = req.params;
     try {
-        const findBlogCat = await BlogCategory.findOne({ slug: slug });
+        const blogCat = await BlogCategory.findOne({ slug: slug });
         res.status(200).json({
             status: true,
             message: 'Blog Category Found!',
-            findBlogCat,
+            blogCat,
         });
     } catch (error) {
         throw new Error(error);
     }
 });
 
-const deleteABlogCategory = asyncHandler(async (req, res) => {
+const deleteBlogCategory = asyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongoDb(id);
     try {
-        const deleteBlogCat = await BlogCategory.findByIdAndDelete(id);
+        const blogCat = await BlogCategory.findByIdAndDelete(id);
         res.status(200).json({
             status: true,
             message: 'Deleted Blog Category Successfully!',
-            deleteBlogCat,
+            blogCat,
         });
     } catch (error) {
         throw new Error(error);
     }
 });
 
-const updateABlogCategory = asyncHandler(async (req, res) => {
+const updateBlogCategory = asyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongoDb(id);
     try {
-        const updateBlogCat = await BlogCategory.findByIdAndUpdate(id, req.body, { new: true });
+        const blogCat = await BlogCategory.findByIdAndUpdate(id, req.body, { new: true });
         res.status(200).json({
             status: true,
             message: 'Blog Category Updated!',
-            updateBlogCat,
+            blogCat,
         });
     } catch (error) {
         throw new Error(error);
@@ -81,7 +81,7 @@ const updateABlogCategory = asyncHandler(async (req, res) => {
 module.exports = {
     postBlogCategory,
     getAllBlogCategories,
-    getABlogCategory,
-    deleteABlogCategory,
-    updateABlogCategory,
+    getBlogCategory,
+    deleteBlogCategory,
+    updateBlogCategory,
 };

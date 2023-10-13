@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const courseSchema = new mongoose.Schema(
+let courseSchema = new mongoose.Schema(
     {
         title: {
             type: String,
@@ -47,7 +47,7 @@ const courseSchema = new mongoose.Schema(
         lessons: [
             {
                 type: mongoose.SchemaTypes.ObjectId,
-                ref: 'User',
+                ref: 'Lesson',
                 required: true,
             },
         ],
@@ -61,7 +61,7 @@ const courseSchema = new mongoose.Schema(
         },
         ratings: [
             {
-                star: Number,
+                stars: Number,
                 comment: String,
                 postedBy: {
                     type: mongoose.SchemaTypes.ObjectId,

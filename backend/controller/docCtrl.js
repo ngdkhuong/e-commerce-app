@@ -61,6 +61,7 @@ const updateDoc = asyncHandler(async (req, res) => {
         res.status(200).json({
             status: true,
             message: 'Doc Updated Successfully!',
+            doc,
         });
     } catch (error) {
         throw new Error(error);

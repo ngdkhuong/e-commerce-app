@@ -21,6 +21,7 @@ const blogCatRouter = require('./router/blogCatRoutes');
 const blogRouter = require('./router/blogRoutes');
 const videoCatRouter = require('./router/videoCatRoutes');
 const courseCatRouter = require('./router/courseCatRoutes');
+const courseRouter = require('./router/courseRoutes');
 const app = express();
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 5000;
@@ -79,6 +80,7 @@ app.use('/api/doc', docRouter);
 app.use('/api/blog/category', blogCatRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/course/category', courseCatRouter);
+app.use('/api/course', courseRouter);
 
 app.use(notFound);
 app.use(errorHandler);

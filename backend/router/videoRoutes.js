@@ -1,5 +1,5 @@
 const videoRouter = require('express').Router();
-const { createVideo, getAllVideos, getVideo, updateVideo, deleteVideo } = require('../controller/videoCtrl');
+const { createVideo, getVideo, getAllVideos, updateVideo, deleteVideo } = require('../controller/videoCtrl');
 const { authMiddleware, isAdmin } = require('../middleware/authMiddleware');
 
 videoRouter.post('/', authMiddleware, isAdmin, createVideo);

@@ -4,77 +4,77 @@ const asyncHandler = require('express-async-handler');
 const validateMongoDb = require('../config/validateMongoDb');
 
 // create Document category || POST
-const postDocumentCategory = asyncHandler(async (req, res) => {
+const createDocumentCategory = asyncHandler(async (req, res) => {
     try {
         if (req.body.title) {
             req.body.slug = slugify(req.body.title.toLowerCase());
         }
 
-        const postDocCat = await DocumentCategory.create(req.body);
+        const postDocumentCategory = await DocumentCategory.create(req.body);
         res.status(200).json({
             status: true,
             message: 'Document Category Created Successfully!',
-            postDocCat,
+            postDocumentCategory,
         });
     } catch (error) {
         throw new Error(error);
     }
 });
 
-const getAllDocCategories = asyncHandler(async (req, res) => {
+const getAllDocumentCategories = asyncHandler(async (req, res) => {
     try {
-        const allDocCat = await DocumentCategory.find();
+        const allDocumentCategory = await DocumentCategory.find();
         res.status(200).json({
             status: true,
             message: 'Documents Category Fetched Successfully!',
-            allDocCat,
+            allDocumentCategory,
         });
     } catch (error) {
         throw new Error(error);
     }
 });
 
-const getADocCat = asyncHandler(async (req, res) => {
+const getDocumentCategory = asyncHandler(async (req, res) => {
     const { slug } = req.params;
     try {
-        const findDocCat = await DocumentCategory.findOne({ slug: slug });
+        const docCat = await DocumentCategory.findOne({ slug: slug });
         res.status(200).json({
             status: true,
             message: 'Document Category Found!',
-            findDocCat,
+            docCat,
         });
     } catch (error) {
         throw new Error(error);
     }
 });
 
-const deleteADocCat = asyncHandler(async (req, res) => {
+const deleteDocumentCategory = asyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongoDb(id);
     try {
-        const deleteDocCat = await DocumentCategory.findByIdAndDelete(id);
+        const docCat = await DocumentCategory.findByIdAndDelete(id);
         res.status(200).json({
             status: true,
             message: 'Deleted Document Category Successfully!',
-            deleteDocCat,
+            docCat,
         });
     } catch (error) {
         throw new Error(error);
     }
 });
 
-const updateADocCat = asyncHandler(async (req, res) => {
+const updateDocumentCategory = asyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongoDb(id);
     try {
         if (req.body.title) {
             req.body.slug = slugify(req.body.title.toLowerCase());
         }
-        const updateDocCat = await DocumentCategory.findByIdAndUpdate(id, req.body, { new: true });
+        const docCat = await DocumentCategory.findByIdAndUpdate(id, req.body, { new: true });
         res.status(200).json({
             status: true,
             message: 'Document Category Updated!',
-            updateDocCat,
+            docCat,
         });
     } catch (error) {
         throw new Error(error);
@@ -82,9 +82,9 @@ const updateADocCat = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-    postDocumentCategory,
-    getAllDocCategories,
-    getADocCat,
-    deleteADocCat,
-    updateADocCat,
+    createDocumentCategory,
+    getAllDocumentCategories,
+    getDocumentCategory,
+    deleteDocumentCategory,
+    updateDocumentCategory,
 };

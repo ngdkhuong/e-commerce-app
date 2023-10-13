@@ -20,7 +20,7 @@ userRouter.post('/login', loginUser);
 userRouter.post('/forgot-password', forgotPassword);
 
 // all get routes
-userRouter.get('/all-users', isAdmin, getAllUser);
+userRouter.get('/all-users', authMiddleware, isAdmin, getAllUser);
 userRouter.get('/:id', authMiddleware, getAUser);
 
 // all put routes

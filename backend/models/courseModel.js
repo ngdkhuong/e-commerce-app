@@ -40,13 +40,13 @@ let courseSchema = new mongoose.Schema(
             default: false,
         },
         instructor: {
-            type: mongoose.SchemaTypes.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
             required: true,
         },
         lessons: [
             {
-                type: mongoose.SchemaTypes.ObjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref: 'Lesson',
             },
         ],
@@ -63,7 +63,7 @@ let courseSchema = new mongoose.Schema(
                 stars: Number,
                 comment: String,
                 postedBy: {
-                    type: mongoose.SchemaTypes.ObjectId,
+                    type: mongoose.Schema.Types.ObjectId,
                     ref: 'User',
                 },
             },

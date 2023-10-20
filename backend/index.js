@@ -56,7 +56,7 @@ app.use(
 );
 
 // GET testing server
-app.get('/api/test', (req, res) => {
+app.get('/api/hello', (req, res) => {
     res.send('Welcome to LMS Server! Suka Blyad');
 });
 

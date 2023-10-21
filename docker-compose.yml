@@ -29,7 +29,7 @@ services:
         ports:
             - '27017:27017'
         volumes:
-            - mongo-backup: /data/db
+            - /home/ngkhuong/mongo-backup:/data/db
         networks:
             - mern-network
 

@@ -1,15 +1,14 @@
-FROM node:18-slim
+FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
 COPY ./package.json ./
-COPY ./yarn.lock ./
 
-RUN yarn install 
+RUN npm install 
 
 COPY . .
 
 EXPOSE 4000
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
 

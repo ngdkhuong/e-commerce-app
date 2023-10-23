@@ -9,21 +9,21 @@ const {
 const { createLesson, deleteLesson, getLesson, getAllCourseLesson, updateLesson } = require('../controller/lessonCtrl');
 
 const courseRouter = require('express').Router();
-const { authMiddleware, isBoth } = require('../middleware/authMiddleware');
+const { restrictTo } = require('../middleware/authMiddleware');
 
-courseRouter.post('/', authMiddleware, isBoth, createCourse);
-courseRouter.get('/instructor/all-courses', authMiddleware, isBoth, getParticularInstructorCourses);
+courseRouter.post('/', restrictTo('admin', 'instructor'), createCourse);
+courseRouter.get('/instructor/all-courses', restrictTo('admin', 'instructor'), getParticularInstructorCourses);
 courseRouter.get('/all', getAllCourses);
 courseRouter.get('/:slug', getCourse);
-courseRouter.put('/:id', authMiddleware, isBoth, updateCourse);
-courseRouter.delete('/:id', authMiddleware, isBoth, deleteCourse);
+courseRouter.put('/:id', restrictTo('admin', 'instructor'), updateCourse);
+courseRouter.delete('/:id', restrictTo('admin', 'instructor'), deleteCourse);
 
 /* =============== Lessons ================= */
 
-courseRouter.post('/lesson/:courseId', authMiddleware, isBoth, createLesson);
-courseRouter.delete('/lesson/:courseId/:lessonId', authMiddleware, isBoth, deleteLesson);
-courseRouter.get('/lesson/:id', authMiddleware, isBoth, getLesson);
-courseRouter.get('/lessons/:courseId', authMiddleware, isBoth, getAllCourseLesson);
-courseRouter.put('/lesson/:lessonId', authMiddleware, isBoth, updateLesson);
+courseRouter.post('/lesson/:courseId', restrictTo('admin', 'instructor'), createLesson);
+courseRouter.delete('/lesson/:courseId/:lessonId', restrictTo('admin', 'instructor'), deleteLesson);
+courseRouter.get('/lesson/:id', restrictTo('admin', 'instructor'), getLesson);
+courseRouter.get('/lessons/:courseId', restrictTo('admin', 'instructor'), getAllCourseLesson);
+courseRouter.put('/lesson/:lessonId', restrictTo('admin', 'instructor'), updateLesson);
 
 module.exports = courseRouter;

@@ -22,6 +22,8 @@ const blogRouter = require('./router/blogRoutes');
 const videoCatRouter = require('./router/videoCatRoutes');
 const courseCatRouter = require('./router/courseCatRoutes');
 const courseRouter = require('./router/courseRoutes');
+const rateLimiter = require('./utils/reqLimit');
+const workRouter = require('./router/workRoutes');
 const app = express();
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 5000;
@@ -59,13 +61,14 @@ app.use(
 app.get('/api/hello', (req, res) => {
     res.send('Welcome to LMS Server! Suka Blyad');
 });
+app.set('trust proxy', 1);
 
 // Testing google auth
 // app.get('/', (req, res) => {
 //     res.send(`<a href="http://localhost:4000/google">Login With Google</a>`);
 // });
 
-// Auth
+app.use('/api', rateLimiter(60 * 60 * 1000, 'Seconds', 50, 'Only 50 Requests Allowed'));
 app.use('/api/user', userRouter);
 app.use('/', googleRouter);
 app.use('/api/tutorial/category', tutCatRouter);
@@ -81,6 +84,7 @@ app.use('/api/blog/category', blogCatRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/course/category', courseCatRouter);
 app.use('/api/course', courseRouter);
+app.use('/api/work', workRouter);
 
 app.use(notFound);
 app.use(errorHandler);

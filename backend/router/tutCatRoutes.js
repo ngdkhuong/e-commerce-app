@@ -6,12 +6,12 @@ const {
     deleteATutCat,
     updateATutCat,
 } = require('../controller/tutCatCtrl');
-const { authMiddleware, isAdmin } = require('../middleware/authMiddleware');
+const { authMiddleware, restrictTo } = require('../middleware/authMiddleware');
 
-tutCatRouter.post('/', authMiddleware, isAdmin, postTutorialCategory);
+tutCatRouter.post('/', authMiddleware, restrictTo('admin'), postTutorialCategory);
 tutCatRouter.get('/all', getAllTutCategories);
-tutCatRouter.get('/:id', authMiddleware, isAdmin, getATutCat);
-tutCatRouter.put('/:id', authMiddleware, isAdmin, updateATutCat);
-tutCatRouter.delete('/:id', authMiddleware, isAdmin, deleteATutCat);
+tutCatRouter.get('/:id', authMiddleware, restrictTo('admin'), getATutCat);
+tutCatRouter.put('/:id', authMiddleware, restrictTo('admin'), updateATutCat);
+tutCatRouter.delete('/:id', authMiddleware, restrictTo('admin'), deleteATutCat);
 
 module.exports = tutCatRouter;

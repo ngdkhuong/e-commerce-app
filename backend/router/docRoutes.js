@@ -1,11 +1,11 @@
 const docRouter = require('express').Router();
 const { createDoc, getAllDocs, getDoc, updateDoc, deleteDoc } = require('../controller/docCtrl');
-const { authMiddleware, isAdmin } = require('../middleware/authMiddleware');
+const { authMiddleware, restrictTo } = require('../middleware/authMiddleware');
 
-docRouter.post('/', authMiddleware, isAdmin, createDoc);
+docRouter.post('/', authMiddleware, restrictTo('admin'), createDoc);
 docRouter.get('/', getAllDocs);
 docRouter.get('/:slug', getDoc);
-docRouter.put('/:id', authMiddleware, isAdmin, updateDoc);
-docRouter.delete('/:id', authMiddleware, isAdmin, deleteDoc);
+docRouter.put('/:id', authMiddleware, restrictTo('admin'), updateDoc);
+docRouter.delete('/:id', authMiddleware, restrictTo('admin'), deleteDoc);
 
 module.exports = docRouter;

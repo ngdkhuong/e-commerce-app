@@ -6,12 +6,12 @@ const {
     deleteDocumentCategory,
     updateDocumentCategory,
 } = require('../controller/docCatCtrl');
-const { authMiddleware, isAdmin } = require('../middleware/authMiddleware');
+const { authMiddleware, restrictTo } = require('../middleware/authMiddleware');
 
-docCatRouter.post('/', authMiddleware, isAdmin, createDocumentCategory);
+docCatRouter.post('/', authMiddleware, restrictTo('admin'), createDocumentCategory);
 docCatRouter.get('/all', getAllDocumentCategories);
-docCatRouter.get('/:slug', authMiddleware, isAdmin, getDocumentCategory);
-docCatRouter.put('/:id', authMiddleware, isAdmin, updateDocumentCategory);
-docCatRouter.delete('/:id', authMiddleware, isAdmin, deleteDocumentCategory);
+docCatRouter.get('/:slug', authMiddleware, restrictTo('admin'), getDocumentCategory);
+docCatRouter.put('/:id', authMiddleware, restrictTo('admin'), updateDocumentCategory);
+docCatRouter.delete('/:id', authMiddleware, restrictTo('admin'), deleteDocumentCategory);
 
 module.exports = docCatRouter;

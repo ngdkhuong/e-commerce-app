@@ -22,34 +22,14 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
     }
 });
 
-const isAdmin = asyncHandler(async (req, res, next) => {
-    const { email } = req.user;
-    const isAdmin = await User.findOne({ email });
-    if (isAdmin.roles !== 'admin') {
-        throw new Error('You are not an Admin.');
-    } else {
-        next();
-    }
-});
+const restrictTo = (...roles) => {
+    return asyncHandler(async (req, res, next) => {
+        if (!roles.includes(req.user.roles)) {
+            throw new Error('You are not authorized');
+        } else {
+            next();
+        }
+    });
+};
 
-const isInstructor = asyncHandler(async (req, res, next) => {
-    const { email } = req.user;
-    const isInstructor = await User.findOne({ email: email });
-    if (isInstructor.roles !== 'instructor') {
-        throw new Error('You are not an Instructor.');
-    } else {
-        next();
-    }
-});
-
-const isBoth = asyncHandler(async (req, res, next) => {
-    const { email } = req.user;
-    const isBoth = await User.findOne({ email: email });
-    if (isBoth.roles !== 'instructor' && isBoth.roles !== 'admin') {
-        throw new Error('You should have either admin role or instructor role');
-    } else {
-        next();
-    }
-});
-
-module.exports = { authMiddleware, isAdmin, isInstructor, isBoth };
+module.exports = { authMiddleware, restrictTo };

@@ -12,25 +12,26 @@ const {
     forgotPassword,
     resetPassword,
 } = require('../controller/userCtrl');
-const { isAdmin, authMiddleware } = require('../middleware/authMiddleware');
+const { restrictTo, authMiddleware } = require('../middleware/authMiddleware');
+const rateLimiter = require('../utils/reqLimit');
 
 // all post routes
-userRouter.post('/register', registerUser);
+userRouter.post('/register', rateLimiter(60 * 60 * 1000, 2, 'Seconds', 2), registerUser);
 userRouter.post('/login', loginUser);
 userRouter.post('/forgot-password', forgotPassword);
 
 // all get routes
-userRouter.get('/all-users', authMiddleware, isAdmin, getAllUser);
+userRouter.get('/all-users', authMiddleware, restrictTo('admin'), getAllUser);
 userRouter.get('/:id', authMiddleware, getAUser);
 
 // all put routes
 userRouter.put('/update-profile', authMiddleware, updateUser);
-userRouter.put('/block/:id', authMiddleware, isAdmin, blockUser);
-userRouter.put('/unblock/:id', authMiddleware, isAdmin, unblockUser);
+userRouter.put('/block/:id', authMiddleware, restrictTo('admin'), blockUser);
+userRouter.put('/unblock/:id', authMiddleware, restrictTo('admin'), unblockUser);
 userRouter.put('/update-password', authMiddleware, updatePassword);
 userRouter.put('/reset-password/:token', resetPassword);
 
 // all delete routes
-userRouter.delete('/:id', authMiddleware, isAdmin, deleteUser);
+userRouter.delete('/:id', authMiddleware, restrictTo('admin'), deleteUser);
 
 module.exports = userRouter;

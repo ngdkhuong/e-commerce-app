@@ -1,11 +1,11 @@
 const videoRouter = require('express').Router();
 const { createVideo, getVideo, getAllVideos, updateVideo, deleteVideo } = require('../controller/videoCtrl');
-const { authMiddleware, isAdmin } = require('../middleware/authMiddleware');
+const { authMiddleware, restrictTo } = require('../middleware/authMiddleware');
 
-videoRouter.post('/', authMiddleware, isAdmin, createVideo);
+videoRouter.post('/', authMiddleware, restrictTo('admin'), createVideo);
 videoRouter.get('/', getAllVideos);
 videoRouter.get('/:slug', getVideo);
-videoRouter.put('/:id', authMiddleware, isAdmin, updateVideo);
-videoRouter.delete('/:id', authMiddleware, isAdmin, deleteVideo);
+videoRouter.put('/:id', authMiddleware, restrictTo('admin'), updateVideo);
+videoRouter.delete('/:id', authMiddleware, restrictTo('admin'), deleteVideo);
 
 module.exports = videoRouter;

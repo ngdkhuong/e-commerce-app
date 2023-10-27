@@ -4,3 +4,7 @@ body {
     background-color: #f2f3ff !important;
     font-family: 'Lato', sans-serif !important;
 }
+
+.fit-content {
+    width: fit-content;
+}

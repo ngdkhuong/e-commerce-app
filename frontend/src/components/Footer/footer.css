@@ -1,0 +1,8 @@
+.footer {
+}
+
+.footer-logo .comp-name {
+    background: -webkit-linear-gradient(90deg, #cfa2e8, #637fea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

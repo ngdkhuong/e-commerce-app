@@ -5,17 +5,18 @@ import { Avatar, Col, Layout, Row } from 'antd';
 import { AiFillFacebook, AiFillGithub, AiFillYoutube, AiOutlineInstagram, AiOutlineWhatsApp } from 'react-icons/ai';
 import CustomButton from '../custom/CustomButton';
 import CustomInput from '../custom/CustomInput';
+import Link from 'next/link';
 const { Footer } = Layout;
 
 export default function CustomFooter() {
     return (
-        <Footer className="footer bg-white">
+        <Footer className="footer bg-white container-fluid">
             <Row>
                 <Col span={6}>
                     <div className="footer-logo d-flex flex-column gap-3">
                         <div>
                             <Avatar src="" />
-                            <h3 className="footer-heading-color">Ryan Nguyen</h3>
+                            <h3 className="footer-heading-color">IT-EDU</h3>
                         </div>
                         <p>
                             We’re always in search for talented and motivated people. Don’t be shy introduce yourself!
@@ -68,23 +69,53 @@ export default function CustomFooter() {
                 <Col span={4}>
                     <h3>Useful Links</h3>
                     <div className="mt-3 d-flex flex-column">
-                        <CustomButton title="Marketplace" className="fit-content ps-0" type="link" />
-                        <CustomButton title="kindergarten" className="fit-content ps-0" type="link" />
-                        <CustomButton title="University" className="fit-content ps-0" type="link" />
-                        <CustomButton title="FAQ" className="fit-content ps-0" type="link" />
-                        <CustomButton title="About Us" className="fit-content ps-0" type="link" />
-                        <CustomButton title="Privacy policy" className="fit-content ps-0" type="link" />
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            Marketplace
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            kindergarten
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            University
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            GYM Coaching
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            FAQ
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            About Us
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            Privacy policy
+                        </Link>
                     </div>
                 </Col>
                 <Col span={4}>
                     <h3>Our Company</h3>
                     <div className="mt-3 d-flex flex-column">
-                        <CustomButton title="Contact Us" className="fit-content ps-0" type="link" />
-                        <CustomButton title="Become Teacher" className="fit-content ps-0" type="link" />
-                        <CustomButton title="Blog" className="fit-content ps-0" type="link" />
-                        <CustomButton title="Instructor" className="fit-content ps-0" type="link" />
-                        <CustomButton title="Events" className="fit-content ps-0" type="link" />
-                        <CustomButton title="Course" className="fit-content ps-0" type="link" />
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            Contact Us
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            Become Teacher
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            Blog
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            Instructor
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            Events
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            Course
+                        </Link>
+                        <Link className="text-decoration-none text-dark" href={'#'}>
+                            Contact
+                        </Link>
                     </div>
                 </Col>
                 <Col span={10}>
@@ -98,7 +129,10 @@ export default function CustomFooter() {
                         <h4>Newsletter</h4>
                         <p>2000+ Our students are subscribe Around the World. Don’t be shy introduce yourself!</p>
                     </div>
-                    <CustomInput placeholder="Enter Your Email Here"  />
+                    <div className="mt-3 d-flex">
+                        <CustomInput />
+                        <CustomButton title="Subscribe" className="fit-content ps-0 rounded rounded-0" type="primary" />
+                    </div>
                 </Col>
             </Row>
         </Footer>

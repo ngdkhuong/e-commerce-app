@@ -1,21 +1,20 @@
 import CustomInput from './../../components/custom/CustomInput';
 import CustomButton from './../../components/custom/CustomButton';
 import Link from 'next/link';
+import { AiOutlineMail } from 'react-icons/ai';
 
-export default function Signup() {
+export default function ForgotPassword() {
     return (
         <div className="container-fluid bg-white">
             <div className="row py-5">
                 <div className="col-4 mx-auto py-5">
-                    <h3 className="d-flex justify-content-center">Create An Account</h3>
+                    <h3 className="d-flex justify-content-center">Forgot Password</h3>
                     <form action="" className="form-wrapper p-4">
-                        <CustomInput placeholder="Username" />
-                        <CustomInput placeholder="Email Address" className="mt-3" />
-                        <CustomInput className="mt-3" placeholder="Password" />
-                        <CustomButton title="Sign up" type="primary" className="w-100 d-block my-3" />
-                        <div>
+                        <CustomInput placeholder="Email Address" prefix={<AiOutlineMail />} />
+                        <CustomButton title="Proceed" type="primary" className="w-100 d-block my-3" />
+                        <div className="my-3 d-flex justify-content-center">
                             <Link href="/login" className="text-dark text-decoration-none text-center">
-                                Do you already have an Account? <b>Login</b>
+                                Go to <b>Login</b>
                             </Link>
                         </div>
                     </form>

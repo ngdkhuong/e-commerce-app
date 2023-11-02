@@ -5,26 +5,30 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header/Header';
 import { Button, message } from 'antd';
-import CustomFooter from '@/components/Footer/CustomFooter';
+import Footer from '@/components/Footer/Footer';
+import { usePathname } from 'next/navigation';
+import AdminFooter from '@/components/AdminFooter/AdminFooter';
+import AdminHeader from '@/components/AdminHeader/AdminHeader';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({ children }) {
+    const pathname = usePathname();
+
     const [messageApi, contextHolder] = message.useMessage();
     const info = () => {
         messageApi.info('Hello, Ant Design!');
     };
 
+    console.log(pathname);
+
     return (
         <html lang="en">
             <body>
-                <Header />
+                {pathname !== '/admin/dashboard' ? <Header /> : <AdminHeader />}
                 {children}
-                <CustomFooter />
+                {pathname !== '/admin/dashboard' ? <Footer /> : <AdminFooter />}
                 {contextHolder}
-                <Button type="primary" onClick={info}>
-                    Display normal message
-                </Button>
             </body>
         </html>
     );

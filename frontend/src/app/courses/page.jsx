@@ -1,6 +1,8 @@
+'use client';
+
 import CustomCard from '@/components/custom/CustomCard';
 
-export default function Courses({ courses }) {
+export default function Courses() {
     return (
         <main className="py-5">
             <div className="container-fluid">
@@ -12,10 +14,4 @@ export default function Courses({ courses }) {
             </div>
         </main>
     );
-}
-
-export async function getStaticProps() {
-    const res = await fetch('http://localhost:4000/api/courses');
-    const Coursers = await res.json();
-    return { props: { Coursers } };
 }

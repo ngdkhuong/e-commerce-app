@@ -29,7 +29,7 @@ const createCourse = asyncHandler(async (req, res) => {
 // Get All Courses
 const getAllCourses = asyncHandler(async (req, res) => {
     try {
-        const courses = await Course.find();
+        const courses = await Course.find().populate('instructor');
         res.status(200).json({
             status: true,
             message: 'All Courses Fetched!',

@@ -8,3 +8,8 @@ body {
 .fit-content {
     width: fit-content;
 }
+
+.ant-layout {
+    min-height: 100vh;
+    height: 100%;
+}

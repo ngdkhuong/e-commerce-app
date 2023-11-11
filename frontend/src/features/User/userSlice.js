@@ -1,22 +1,41 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { authService } from './userService';
 
-const initialState = { value: 0 };
+export const loginUser = createAsyncThunk('user/login', async (data, { rejectWithValue }) => {
+    try {
+        const response = await authService.loginAUser(data);
+        return response;
+    } catch (err) {
+        return rejectWithValue(err.response.data);
+    }
+});
 
-const counterSlice = createSlice({
+const initialState = { user: '', isError: false, isSuccess: false, isLoading: false, message: '' };
+
+const userSlice = createSlice({
     name: 'counter',
     initialState,
-    reducers: {
-        increment(state) {
-            state.value++;
-        },
-        decrement(state) {
-            state.value--;
-        },
-        incrementByAmount(state, action) {
-            state.value += action.payload;
-        },
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(loginUser.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loginUser.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.user = action.payload;
+            })
+            .addCase(loginUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.isSuccess = false;
+                state.user = action.error;
+                state.message = 'Something went wrong';
+            });
     },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-export default counterSlice.reducer;
+export const { increment, decrement, incrementByAmount } = userSlice.actions;
+export default userSlice.reducer;

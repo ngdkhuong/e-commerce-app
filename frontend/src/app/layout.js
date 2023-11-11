@@ -11,6 +11,7 @@ import AdminFooter from '@/components/AdminFooter/AdminFooter';
 import AdminHeader from '@/components/AdminHeader/AdminHeader';
 import AdminSidebar from '@/components/AdminSidebar/AdminSidebar';
 import { useState } from 'react';
+import { Providers } from '@/Provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,19 +27,21 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body>
-                <Layout>
-                    {pathname === '/admin/dashboard' && <AdminSidebar collapsed={collapsed} />}
+                <Providers>
                     <Layout>
-                        {!pathname.includes('/admin') ? (
-                            <Header />
-                        ) : (
-                            <AdminHeader setCollapsed={setCollapsed} collapsed={collapsed} />
-                        )}
-                        <div className={pathname.includes('/admin') && 'p-3'}>{children}</div>
-                        {!pathname.includes('/admin') ? <Footer /> : <AdminFooter />}
+                        {pathname === '/admin/dashboard' && <AdminSidebar collapsed={collapsed} />}
+                        <Layout>
+                            {!pathname.includes('/admin') ? (
+                                <Header />
+                            ) : (
+                                <AdminHeader setCollapsed={setCollapsed} collapsed={collapsed} />
+                            )}
+                            <div className={pathname.includes('/admin') && 'p-3'}>{children}</div>
+                            {!pathname.includes('/admin') ? <Footer /> : <AdminFooter />}
+                        </Layout>
+                        {contextHolder}
                     </Layout>
-                    {contextHolder}
-                </Layout>
+                </Providers>
             </body>
         </html>
     );

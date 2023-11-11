@@ -1,4 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counter from './features/User/userSlice';
+import userReducer from './features/User/userSlice';
 
-export const store = configureStore({ reducer: counter });
+export const store = configureStore({ user: userReducer });

@@ -37,5 +37,4 @@ const userSlice = createSlice({
     },
 });
 
-export const { increment, decrement, incrementByAmount } = userSlice.actions;
 export default userSlice.reducer;

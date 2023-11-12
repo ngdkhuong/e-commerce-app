@@ -1,3 +1,5 @@
+'use client';
+
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Avatar, Layout, Menu } from 'antd';
 const { Sider } = Layout;

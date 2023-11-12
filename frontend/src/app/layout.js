@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
             <body>
                 <Providers>
                     <Layout>
-                        {pathname === '/admin/dashboard' && <AdminSidebar collapsed={collapsed} />}
+                        {pathname === '/admin' && <AdminSidebar collapsed={collapsed} />}
                         <Layout>
                             {!pathname.includes('/admin') ? (
                                 <Header />

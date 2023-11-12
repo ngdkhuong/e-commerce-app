@@ -1,3 +1,5 @@
+'use client';
+
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { Layout, Button, theme } from 'antd';
 const { Header } = Layout;

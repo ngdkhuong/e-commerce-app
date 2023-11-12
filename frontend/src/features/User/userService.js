@@ -2,11 +2,11 @@ const { axiosInstance } = require('@/config/axiosConfig');
 
 const loginAUser = async (data) => {
     const res = await axiosInstance({
-        url: 'login',
+        url: 'user/login',
         method: 'POST',
         data: data,
     });
-    return res;
+    return res.data;
 };
 
 export const authService = {

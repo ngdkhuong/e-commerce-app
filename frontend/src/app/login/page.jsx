@@ -8,13 +8,21 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { loginUser } from '@/features/User/userSlice';
 import { unwrapResult } from '@reduxjs/toolkit';
+import { message } from 'antd';
 import * as yup from 'yup';
 import Link from 'next/link';
 import './login.css';
 
+const loginSchema = yup.object({
+    email: yup.string().email('Email should be valid').required('Email Address is Required'),
+    password: yup.string().nullable().required('Password is Required'),
+});
+
 export default function Login() {
+    const [messageApi, contextHolder] = message.useMessage();
     const dispatch = useDispatch();
     const formik = useFormik({
+        validationSchema: loginSchema,
         initialValues: {
             email: '',
             password: '',
@@ -22,7 +30,13 @@ export default function Login() {
         onSubmit: (values) => {
             dispatch(loginUser(values))
                 .then(unwrapResult)
-                .then((res) => console.log(res))
+                .then((res) => {
+                    if (res.status) {
+                        messageApi.success(res.message);
+                    } else {
+                        messageApi.error(res.message);
+                    }
+                })
                 .catch((error) => {
                     console.log(error);
                 });
@@ -31,6 +45,7 @@ export default function Login() {
 
     return (
         <div className="container-fluid bg-white">
+            {contextHolder}
             <div className="row py-5">
                 <div className="col-4 mx-auto py-5">
                     <h3 className="d-flex justify-content-center">Login</h3>

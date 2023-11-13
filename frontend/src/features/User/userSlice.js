@@ -6,11 +6,28 @@ export const loginUser = createAsyncThunk('user/login', async (data, { rejectWit
         const response = await authService.loginAUser(data);
         return response;
     } catch (err) {
-        return rejectWithValue(err.response.data);
+        return rejectWithValue(err);
     }
 });
 
-const initialState = { user: '', isError: false, isSuccess: false, isLoading: false, message: '' };
+export const registerUser = createAsyncThunk('user/register', async (data, { rejectWithValue }) => {
+    try {
+        const response = await authService.registerAUser(data);
+        return response;
+    } catch (err) {
+        return rejectWithValue(err);
+    }
+});
+
+const userFromLocalStorage = localStorage.getItem('user');
+
+const initialState = {
+    user: JSON.parse(userFromLocalStorage),
+    isError: false,
+    isSuccess: false,
+    isLoading: false,
+    message: '',
+};
 
 const userSlice = createSlice({
     name: 'counter',
@@ -28,6 +45,21 @@ const userSlice = createSlice({
                 state.user = action.payload;
             })
             .addCase(loginUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.isSuccess = false;
+                state.user = action.error;
+                state.message = 'Something went wrong';
+            })
+            .addCase(registerUser.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(registerUser.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+            })
+            .addCase(registerUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.isSuccess = false;

@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { loginUser } from '@/features/User/userSlice';
 import { unwrapResult } from '@reduxjs/toolkit';
+import { useRouter } from 'next/navigation';
 import { message } from 'antd';
 import * as yup from 'yup';
 import Link from 'next/link';
@@ -20,7 +21,11 @@ const loginSchema = yup.object({
 
 export default function Login() {
     const [messageApi, contextHolder] = message.useMessage();
+
+    const router = useRouter();
+
     const dispatch = useDispatch();
+
     const formik = useFormik({
         validationSchema: loginSchema,
         initialValues: {
@@ -33,6 +38,8 @@ export default function Login() {
                 .then((res) => {
                     if (res.status) {
                         messageApi.success(res.message);
+                        localStorage.setItem('user', JSON.stringify(res));
+                        router.push('/');
                     } else {
                         messageApi.error(res.message);
                     }

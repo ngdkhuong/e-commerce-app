@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
                             ) : (
                                 <AdminHeader setCollapsed={setCollapsed} collapsed={collapsed} />
                             )}
-                            <div className={pathname.includes('/admin') && 'p-3'}>{children}</div>
+                            <div className={pathname.includes('/admin') ? 'p-3' : ''}>{children}</div>
                             {!pathname.includes('/admin') ? <Footer /> : <AdminFooter />}
                         </Layout>
                         {contextHolder}

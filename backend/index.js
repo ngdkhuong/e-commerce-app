@@ -24,6 +24,8 @@ const courseCatRouter = require('./router/courseCatRoutes');
 const courseRouter = require('./router/courseRoutes');
 const rateLimiter = require('./utils/reqLimit');
 const workRouter = require('./router/workRoutes');
+const projectCatRouter = require('./router/projectCatRoutes');
+const projectRouter = require('./router/projectRoutes');
 const app = express();
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 5000;
@@ -85,6 +87,8 @@ app.use('/api/blog', blogRouter);
 app.use('/api/course/category', courseCatRouter);
 app.use('/api/course', courseRouter);
 app.use('/api/work', workRouter);
+app.use('/api/project/category', projectCatRouter);
+app.use('/api/project', projectRouter);
 
 app.use(notFound);
 app.use(errorHandler);

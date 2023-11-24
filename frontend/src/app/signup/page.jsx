@@ -36,8 +36,15 @@ export default function Signup() {
                 .then(unwrapResult)
                 .then((res) => {
                     if (res.status) {
-                        messageApi.success(res.message);
-                        router.push('/login');
+                        messageApi
+                            .open({
+                                type: 'loading',
+                                content: 'Progress..',
+                                duration: 2.5,
+                            })
+                            .then(() => message.success(res.message, 2.5))
+                            .then(() => message.info('Redirecting to Login Page...', 2.5))
+                            .then(() => router.push('/login'));
                     } else {
                         messageApi.error(res.message);
                     }

@@ -1,10 +1,14 @@
 const asyncHandler = require('express-async-handler');
 const validateMongoDb = require('../config/validateMongoDb');
 const APIFeatures = require('../utils/apiFeatures');
+const { default: slugify } = require('slugify');
 
 const createOne = (Model) => {
     return asyncHandler(async (req, res, next) => {
         try {
+            if (req.body.title) {
+                req.body.slug = slugify(req.body.title.toLowerCase());
+            }
             const data = await Model.create(req.body);
             res.status(200).json({
                 status: true,
@@ -21,6 +25,9 @@ const updateOne = (Model) => {
         const { id } = req.params;
         validateMongoDb(id);
         try {
+            if (req.body.title) {
+                req.body.slug = slugify(req.body.title.toLowerCase());
+            }
             const data = await Model.findByIdAndUpdate(id, req.body, { new: true });
             res.status(200).json({
                 status: true,
@@ -67,9 +74,6 @@ const getOne = (Model, populateOptions) => {
             }
 
             const data = await query;
-            if (!data) {
-                throw new Error('No data found with this Id');
-            }
 
             res.status(200).json({
                 status: true,

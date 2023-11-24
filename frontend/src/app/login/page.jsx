@@ -39,7 +39,9 @@ export default function Login() {
                     if (res.status) {
                         messageApi.success(res.message);
                         localStorage.setItem('user', JSON.stringify(res));
-                        router.push('/');
+                        setTimeout(() => {
+                            router.push('/');
+                        }, 2000);
                     } else {
                         messageApi.error(res.message);
                     }

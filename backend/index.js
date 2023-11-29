@@ -2,6 +2,8 @@ const express = require('express');
 const dbConnect = require('./config/dbConnect');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const uuid = require('uuid');
 const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -26,6 +28,8 @@ const rateLimiter = require('./utils/reqLimit');
 const workRouter = require('./router/workRoutes');
 const projectCatRouter = require('./router/projectCatRoutes');
 const projectRouter = require('./router/projectRoutes');
+const bookRouter = require('./router/bookRoutes');
+const qnaRoutes = require('./router/qnaRoutes');
 const app = express();
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 5000;
@@ -49,6 +53,8 @@ app.use(passport.session());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(uuid());
 
 // Middleware for handling CORS POLICY
 app.use(
@@ -89,6 +95,8 @@ app.use('/api/course', courseRouter);
 app.use('/api/work', workRouter);
 app.use('/api/project/category', projectCatRouter);
 app.use('/api/project', projectRouter);
+app.use('/api/book-session', bookRouter);
+app.use('/api/qna', qnaRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

@@ -32,6 +32,7 @@ const updateOne = (Model) => {
             res.status(200).json({
                 status: true,
                 message: 'Updated Successfully!',
+                data,
             });
         } catch (error) {
             throw new Error(error);

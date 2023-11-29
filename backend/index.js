@@ -2,8 +2,6 @@ const express = require('express');
 const dbConnect = require('./config/dbConnect');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const uuid = require('uuid');
 const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -53,8 +51,6 @@ app.use(passport.session());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(uuid());
 
 // Middleware for handling CORS POLICY
 app.use(

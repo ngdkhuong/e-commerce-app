@@ -17,9 +17,21 @@ const createPost = asyncHandler(async (req, res) => {
             user: id,
             question: newQues?._id,
         });
+        res.status(200).json({ status: true, message: 'Create Successfully!', post });
     } catch (error) {
         throw new Error(error);
     }
 });
 
-module.exports = { createPost };
+const getQuestion = asyncHandler(async (req, res) => {
+    const { slug } = req.params;
+
+    try {
+        const findPost = await QNA.findOne({ question: { slug: slug } });
+        res.status(200).json({ status: true, message: 'Found', findPost });
+    } catch (error) {
+        throw new Error(error);
+    }
+});
+
+module.exports = { createPost, getQuestion };

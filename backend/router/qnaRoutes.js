@@ -1,8 +1,9 @@
-const { createPost } = require('../controller/qna/qnaCtrl');
+const { createPost, getQuestion } = require('../controller/qna/qnaCtrl');
 const { authMiddleware, restrictTo } = require('../middleware/authMiddleware');
 
 const qnaRouter = require('express').Router();
 
-qnaRouter.post('/post', authMiddleware, restrictTo('admin'), createPost);
+qnaRouter.post('/post', authMiddleware, createPost);
+qnaRouter.get('/post/:slug', getQuestion);
 
 module.exports = qnaRouter;

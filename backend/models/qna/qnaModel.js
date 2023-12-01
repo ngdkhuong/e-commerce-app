@@ -6,6 +6,10 @@ const qnaSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
         },
+        slug: {
+            type: String,
+            required: true,
+        },
         question: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Question',

@@ -1,8 +1,10 @@
 const { default: slugify } = require('slugify');
 const Question = require('../../models/qna/quesModel');
+const Answer = require('../../models/qna/ansModel');
 const QNA = require('../../models/qna/qnaModel');
 const asyncHandler = require('express-async-handler');
 const validateMongoDb = require('../../config/validateMongoDb');
+const { getOne, getAll, deleteOne } = require('../customCtrl');
 
 const createPost = asyncHandler(async (req, res) => {
     const { id } = req.user;
@@ -16,6 +18,7 @@ const createPost = asyncHandler(async (req, res) => {
         const post = await QNA.create({
             user: id,
             question: newQues?._id,
+            slug: req.body.slug,
         });
         res.status(200).json({ status: true, message: 'Create Successfully!', post });
     } catch (error) {
@@ -23,15 +26,23 @@ const createPost = asyncHandler(async (req, res) => {
     }
 });
 
-const getQuestion = asyncHandler(async (req, res) => {
-    const { slug } = req.params;
+const getQuestion = getOne(QNA, 'question answer');
 
+const getAllQuestion = getAll(QNA, 'question answer');
+
+const deleteAQuestion = asyncHandler(async (req, res) => {
+    const { postId, quesId, ansId } = req.params;
+    validateMongoDb(postId);
+    validateMongoDb(quesId);
+    if (ansId) validateMongoDb(ansId);
     try {
-        const findPost = await QNA.findOne({ question: { slug: slug } });
-        res.status(200).json({ status: true, message: 'Found', findPost });
+        const deletePost = await QNA.findByIdAndDelete(postId);
+        const deleteQues = await Question.findByIdAndDelete(quesId);
+        if (ansId) await Answer.findByIdAndDelete(ansId);
+        res.status(200).json({ status: true, message: 'Deleted' });
     } catch (error) {
         throw new Error(error);
     }
 });
 
-module.exports = { createPost, getQuestion };
+module.exports = { createPost, getQuestion, getAllQuestion, deleteAQuestion };

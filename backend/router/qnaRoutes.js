@@ -3,12 +3,12 @@ const { authMiddleware, restrictTo } = require('../middleware/authMiddleware');
 
 const qnaRouter = require('express').Router();
 
-qnaRouter.post('/', authMiddleware, createPost);
-qnaRouter.get('/:slug', getQuestion);
-qnaRouter.get('/', getAllQuestion);
+qnaRouter.post('/post', authMiddleware, createPost);
+qnaRouter.get('/post/:slug', getQuestion);
+qnaRouter.get('/post', getAllQuestion);
 
 /* delete*/
 
-qnaRouter.delete('/:postId/:quesId/:answerId', authMiddleware, deleteAQuestion);
+qnaRouter.delete('/post/:postId/:quesId/:ansId', authMiddleware, deleteAQuestion);
 
 module.exports = qnaRouter;

@@ -32,13 +32,14 @@ const getAllQuestion = getAll(QNA, 'question answer');
 
 const deleteAQuestion = asyncHandler(async (req, res) => {
     const { postId, quesId, ansId } = req.params;
+    console.log(postId, quesId, ansId);
     validateMongoDb(postId);
     validateMongoDb(quesId);
-    if (ansId) validateMongoDb(ansId);
+    if (ansId && ansId !== 'null') validateMongoDb(ansId);
     try {
         const deletePost = await QNA.findByIdAndDelete(postId);
         const deleteQues = await Question.findByIdAndDelete(quesId);
-        if (ansId) await Answer.findByIdAndDelete(ansId);
+        if (ansId && ansId !== 'null') await Answer.findByIdAndDelete(ansId);
         res.status(200).json({ status: true, message: 'Deleted' });
     } catch (error) {
         throw new Error(error);

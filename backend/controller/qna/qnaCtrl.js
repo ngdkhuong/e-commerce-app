@@ -4,7 +4,7 @@ const Answer = require('../../models/qna/ansModel');
 const QNA = require('../../models/qna/qnaModel');
 const asyncHandler = require('express-async-handler');
 const validateMongoDb = require('../../config/validateMongoDb');
-const { getOne, getAll, deleteOne } = require('../customCtrl');
+const { getOne, getAll, deleteOne, updateOne } = require('../customCtrl');
 
 const createPost = asyncHandler(async (req, res) => {
     const { id } = req.user;
@@ -26,6 +26,37 @@ const createPost = asyncHandler(async (req, res) => {
     }
 });
 
+const createAnswer = asyncHandler(async (req, res) => {
+    const { id } = req.user;
+    const { postId } = req.params;
+    validateMongoDb(id);
+    try {
+        if (req.body.title) {
+            req.body.slug = slugify(req.body.title.toLowerCase());
+        }
+        const data = {
+            user: id,
+            ...req.body,
+        };
+
+        const newAnswer = await Answer.create(req.body);
+        const post = await QNA.findByIdAndUpdate(
+            postId,
+            {
+                answer: newAnswer?._id,
+            },
+            { new: true },
+        );
+        res.status(200).json({ status: true, message: 'Create Successfully!', post });
+    } catch (error) {
+        throw new Error(error);
+    }
+});
+
+const updateQuestion = updateOne(Question);
+
+const updateAnswer = updateOne(Answer);
+
 const getQuestion = getOne(QNA, 'question answer');
 
 const getAllQuestion = getAll(QNA, 'question answer');
@@ -46,4 +77,12 @@ const deleteAQuestion = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { createPost, getQuestion, getAllQuestion, deleteAQuestion };
+module.exports = {
+    createPost,
+    getQuestion,
+    getAllQuestion,
+    deleteAQuestion,
+    updateQuestion,
+    createAnswer,
+    updateAnswer,
+};

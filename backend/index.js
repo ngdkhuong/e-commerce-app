@@ -28,7 +28,6 @@ const projectCatRouter = require('./router/projectCatRoutes');
 const projectRouter = require('./router/projectRoutes');
 const bookRouter = require('./router/bookRoutes');
 const qnaRoutes = require('./router/qnaRoutes');
-const qnaTagRouter = require('./router/qnaTagRoutes');
 const app = express();
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT || 5000;
@@ -94,7 +93,6 @@ app.use('/api/project/category', projectCatRouter);
 app.use('/api/project', projectRouter);
 app.use('/api/book-session', bookRouter);
 app.use('/api/qna', qnaRoutes);
-app.use('/api/qna-tag', qnaTagRouter);
 
 app.use(notFound);
 app.use(errorHandler);

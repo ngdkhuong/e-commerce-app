@@ -6,6 +6,8 @@ const {
     updateQuestion,
     createAnswer,
     updateAnswer,
+    addComment,
+    deleteComment,
 } = require('../controller/qna/qnaCtrl');
 const { createTag, updateTag, deleteTag, getAllTags, getTag } = require('../controller/qna/qnaTagCtrl');
 const { authMiddleware, restrictTo } = require('../middleware/authMiddleware');
@@ -31,5 +33,9 @@ qnaRouter.put('/post/:id', authMiddleware, updateQuestion);
 qnaRouter.put('/tag/:id', authMiddleware, restrictTo('admin', 'user'), updateTag);
 
 qnaRouter.put('/post/answer/:id', authMiddleware, updateAnswer);
+
+qnaRouter.post('/post/comment/:quesId', authMiddleware, addComment);
+
+qnaRouter.delete('/post/comment/:quesId', authMiddleware, deleteComment);
 
 module.exports = qnaRouter;

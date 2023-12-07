@@ -13,6 +13,7 @@ import { message } from 'antd';
 import * as yup from 'yup';
 import Link from 'next/link';
 import './login.css';
+import Cookies from 'js-cookie';
 
 const loginSchema = yup.object({
     email: yup.string().email('Email should be valid').required('Email Address is Required'),
@@ -38,10 +39,9 @@ export default function Login() {
                 .then((res) => {
                     if (res.status) {
                         messageApi.success(res.message);
+                        Cookies.set('Bearer', res?.token);
                         localStorage.setItem('user', JSON.stringify(res));
-                        setTimeout(() => {
-                            router.push('/');
-                        }, 2000);
+                        router.push('/');
                     } else {
                         messageApi.error(res.message);
                     }

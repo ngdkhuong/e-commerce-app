@@ -29,15 +29,15 @@ export default function RootLayout({ children }) {
             <body>
                 <Providers>
                     <Layout>
-                        {pathname === '/admin' && <AdminSidebar collapsed={collapsed} />}
+                        {pathname === '/admin/dashboard' && <AdminSidebar collapsed={collapsed} />}
                         <Layout>
-                            {!pathname.includes('/admin') ? (
+                            {!pathname.includes('/admin/dashboard') ? (
                                 <Header />
                             ) : (
                                 <AdminHeader setCollapsed={setCollapsed} collapsed={collapsed} />
                             )}
-                            <div className={pathname.includes('/admin') ? 'p-3' : ''}>{children}</div>
-                            {!pathname.includes('/admin') ? <Footer /> : <AdminFooter />}
+                            <div className={pathname.includes('/admin/dashboard') ? 'p-3' : ''}>{children}</div>
+                            {!pathname.includes('/admin/dashboard') ? <Footer /> : <AdminFooter />}
                         </Layout>
                         {contextHolder}
                     </Layout>

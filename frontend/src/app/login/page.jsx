@@ -38,10 +38,21 @@ export default function Login() {
                 .then(unwrapResult)
                 .then((res) => {
                     if (res.status) {
-                        messageApi.success(res.message);
-                        Cookies.set('Bearer', res?.token);
-                        localStorage.setItem('user', JSON.stringify(res));
-                        router.push('/');
+                        messageApi
+                            .open({
+                                type: 'loading',
+                                content: 'Progress..',
+                                duration: 1.5,
+                            })
+                            .then(() => message.success(res.message, 1.5))
+                            .then(() =>
+                                message.info(`Redirecting to ${res?.role === 'user' ? 'Home' : 'Dashboard'}...`, 1.5),
+                            )
+                            .then(() => {
+                                Cookies.set('Bearer', res?.token);
+                                localStorage.setItem('user', JSON.stringify(res));
+                                res?.role === 'user' ? router.push('/') : router.push('/admin/dashboard');
+                            });
                     } else {
                         messageApi.error(res.message);
                     }

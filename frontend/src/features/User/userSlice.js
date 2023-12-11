@@ -66,6 +66,9 @@ const userSlice = createSlice({
                 state.user = action.error;
                 state.message = 'Something went wrong';
             });
+        // .addCase(resetState, (state) => {
+        //     state.user = null;
+        // });
     },
 });
 

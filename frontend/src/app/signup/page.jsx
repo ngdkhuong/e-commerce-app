@@ -40,11 +40,13 @@ export default function Signup() {
                             .open({
                                 type: 'loading',
                                 content: 'Progress..',
-                                duration: 2.5,
+                                duration: 1.5,
                             })
-                            .then(() => message.success(res.message, 2.5))
-                            .then(() => message.info('Redirecting to Login Page...', 2.5))
-                            .then(() => router.push('/login'));
+                            .then(() => message.success(res.message, 1.5))
+                            .then(() => message.info('Redirecting to Login Page...', 1.5))
+                            .then(() => {
+                                router.push('/login');
+                            });
                     } else {
                         messageApi.error(res.message);
                     }

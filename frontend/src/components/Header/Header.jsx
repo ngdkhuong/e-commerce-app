@@ -4,8 +4,16 @@ import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import Link from 'next/link';
 import { Avatar } from 'antd';
 import CustomButton from '../custom/CustomButton';
+import Cookies from 'js-cookie';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
+import { resetState } from '@/features/User/userSlice';
 
 export default function Header() {
+    const userState = useSelector((state) => state?.user?.user);
+    const router = useRouter();
+    const dispatch = useDispatch();
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="white" variant="light">
             <Container fluid>
@@ -30,21 +38,30 @@ export default function Header() {
                         <Link className="fs-6 text-dark text-decoration-none me-4" href="/dashboard">
                             Dashboard
                         </Link>
-                        {/* <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                        </NavDropdown> */}
                     </Nav>
                     <Nav>
-                        <Link className="fs-6 text-dark text-decoration-none me-4" href="/signup">
-                            Sign up
-                        </Link>
-                        <Link className="fs-6 text-dark text-decoration-none me-4" href="/login">
-                            Login
-                        </Link>
+                        {userState === null && (
+                            <Link className="fs-6 text-dark text-decoration-none me-4" href="/signup">
+                                Sign up
+                            </Link>
+                        )}
+                        {userState !== null ? (
+                            <CustomButton
+                                title="Logout"
+                                type="link"
+                                className="text-dark"
+                                onClick={() => {
+                                    localStorage.clear();
+                                    Cookies.remove('Bearer');
+                                    dispatch(resetState())
+                                    router.push("/login");
+                                }}
+                            />
+                        ) : (
+                            <Link className="fs-6 text-dark text-decoration-none me-4" href="/login">
+                                Login
+                            </Link>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

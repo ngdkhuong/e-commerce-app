@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation';
 import AdminFooter from '@/components/AdminFooter/AdminFooter';
 import AdminHeader from '@/components/AdminHeader/AdminHeader';
 import AdminSidebar from '@/components/AdminSidebar/AdminSidebar';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { Providers } from '@/Provider';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -28,19 +28,21 @@ export default function RootLayout({ children }) {
         <html lang="en">
             <body>
                 <Providers>
-                    <Layout>
-                        {pathname === '/admin/dashboard' && <AdminSidebar collapsed={collapsed} />}
+                    <Suspense fallback={<p>Loading...</p>}>
                         <Layout>
-                            {!pathname.includes('/admin/dashboard') ? (
-                                <Header />
-                            ) : (
-                                <AdminHeader setCollapsed={setCollapsed} collapsed={collapsed} />
-                            )}
-                            <div className={pathname.includes('/admin/dashboard') ? 'p-3' : ''}>{children}</div>
-                            {!pathname.includes('/admin/dashboard') ? <Footer /> : <AdminFooter />}
+                            {pathname === '/admin/dashboard' && <AdminSidebar collapsed={collapsed} />}
+                            <Layout>
+                                {!pathname.includes('/admin/dashboard') ? (
+                                    <Header />
+                                ) : (
+                                    <AdminHeader setCollapsed={setCollapsed} collapsed={collapsed} />
+                                )}
+                                <div className={pathname.includes('/admin/dashboard') ? 'p-3' : ''}>{children}</div>
+                                {!pathname.includes('/admin/dashboard') ? <Footer /> : <AdminFooter />}
+                            </Layout>
+                            {contextHolder}
                         </Layout>
-                        {contextHolder}
-                    </Layout>
+                    </Suspense>
                 </Providers>
             </body>
         </html>

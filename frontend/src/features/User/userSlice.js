@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authService } from './userService';
 
 export const loginUser = createAsyncThunk('user/login', async (data, { rejectWithValue }) => {
@@ -20,9 +20,10 @@ export const registerUser = createAsyncThunk('user/register', async (data, { rej
 });
 
 const userFromLocalStorage = localStorage.getItem('user');
+export const resetState = createAction('Reset_all');
 
 const initialState = {
-    user: JSON.parse(userFromLocalStorage),
+    user: JSON.parse(userFromLocalStorage) ? JSON.parse(userFromLocalStorage) : null,
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -65,10 +66,10 @@ const userSlice = createSlice({
                 state.isSuccess = false;
                 state.user = action.error;
                 state.message = 'Something went wrong';
+            })
+            .addCase(resetState, (state) => {
+                state.user = null;
             });
-        // .addCase(resetState, (state) => {
-        //     state.user = null;
-        // });
     },
 });
 

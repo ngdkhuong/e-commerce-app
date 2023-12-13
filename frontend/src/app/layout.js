@@ -30,14 +30,14 @@ export default function RootLayout({ children }) {
                 <Providers>
                     <Suspense fallback={<p>Loading...</p>}>
                         <Layout>
-                            {pathname === '/admin/dashboard' && <AdminSidebar collapsed={collapsed} />}
+                            {pathname.includes('/admin') && <AdminSidebar collapsed={collapsed} />}
                             <Layout>
                                 {!pathname.includes('/admin') ? (
                                     <Header />
                                 ) : (
                                     <AdminHeader setCollapsed={setCollapsed} collapsed={collapsed} />
                                 )}
-                                <div className={pathname.includes('/admin') ? 'p-3' : ''}>{children}</div>
+                                {children}
                                 {!pathname.includes('/admin') ? <Footer /> : <AdminFooter />}
                             </Layout>
                             {contextHolder}

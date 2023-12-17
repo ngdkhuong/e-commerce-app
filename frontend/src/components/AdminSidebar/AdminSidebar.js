@@ -28,22 +28,22 @@ export default function AdminSidebar(props) {
                         label: 'Tutorials',
                         children: [
                             {
-                                key: 'tutorials/add-tutorial-category',
+                                key: '/admin/tutorials/add-category',
                                 icon: <UserOutlined />,
                                 label: 'Add Tutorial Category',
                             },
                             {
-                                key: 'tutorials/view-tutorial-category',
+                                key: '/admin/tutorials/view-category',
                                 icon: <UserOutlined />,
                                 label: 'View/Edit/Delete Tut Category',
                             },
                             {
-                                key: 'tutorials/add-tutorials',
+                                key: '/admin/tutorials/add-tutorials',
                                 icon: <FileAddOutlined />,
                                 label: 'Add Tutorials',
                             },
                             {
-                                key: 'tutorials/view-tutorials',
+                                key: '/admin/tutorials/view-tutorials',
                                 icon: <SettingOutlined />,
                                 label: 'View/Editor/Delete Tuts',
                             },
